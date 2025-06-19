@@ -6,3 +6,5 @@ print("starting silly tetris ...")
 
 gameRunner = GameRunner()
 gameRunner.runGame()
+
+print("bye bye")

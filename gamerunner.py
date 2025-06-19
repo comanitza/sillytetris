@@ -9,7 +9,7 @@ from colors import Colors
 
 from grid import Grid
 class GameRunner:
-    def __init__(self):
+    def __init__(self, playerName: str = "human"):
         pygame.init()
 
         self.titleFont = pygame.font.Font(None, 40)
@@ -19,7 +19,7 @@ class GameRunner:
         self.gameOverSurface = self.titleFont.render("GAME OVER", True, Colors.white)
         self.escToRestartSurface = self.titleFont.render("Press ESC to restart", True, Colors.white)
         self.playerSurface = self.titleFont.render("Player", True, Colors.white)
-        self.playerValueSurface = self.titleFont.render("Stefanita", True, Colors.white)
+        self.playerValueSurface = self.titleFont.render(playerName, True, Colors.white)
         self.pauseSurface = self.titleFont.render("PAUSED", True, Colors.white)
 
         self.scoreRect = pygame.Rect(320, 55, 170, 60)
@@ -42,9 +42,10 @@ class GameRunner:
             # check for events
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    print("bye bye")
                     pygame.quit()
-                    sys.exit()
+
+                    # breaks game loop
+                    return
 
                 if event.type == pygame.KEYDOWN:
                     if self.game.gameOver and event.key == pygame.K_ESCAPE:
